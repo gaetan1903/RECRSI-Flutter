@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:recrsi/models/models.dart';
 import 'package:recrsi/models/database.dart';
 import 'package:loading_overlay/loading_overlay.dart';
+import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'package:flushbar/flushbar.dart';
 
 class CommandePage extends StatefulWidget {
   @override
@@ -20,6 +22,9 @@ class _CommandePage extends State<CommandePage> {
   List<String> _produit = ["Reference Produit"];
   bool isDisable = false;
   bool _saving = false;
+  OverlayEntry overlayEntry;
+  final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
+  QRViewController controller;
 
   @override
   void initState() {
@@ -29,6 +34,12 @@ class _CommandePage extends State<CommandePage> {
     _focus.addListener(() {
       if (_focus.hasFocus) _selectDate(context);
     });
+  }
+
+  @override
+  void dispose() {
+    controller?.dispose();
+    super.dispose();
   }
 
   Future<Null> listProd() async {
@@ -117,7 +128,7 @@ class _CommandePage extends State<CommandePage> {
                                   icon: Icon(Icons.camera_alt_outlined,
                                       color: Colors.red),
                                   onPressed: () {
-                                    print("Hello QR CODE Detector");
+                                    showQrCode();
                                   },
                                 ),
                                 elevation: 16,
@@ -407,5 +418,76 @@ class _CommandePage extends State<CommandePage> {
           },
         );
     }
+  }
+
+  void showQrCode() {
+    overlayEntry = OverlayEntry(
+      builder: (BuildContext context) {
+        return Positioned(
+          top: MediaQuery.of(context).size.height * 0.35,
+          left: MediaQuery.of(context).size.width * 0.05,
+          child: SizedBox(
+              width: MediaQuery.of(context).size.width * 0.9,
+              height: MediaQuery.of(context).size.height * 0.5,
+              child: Column(
+                children: [
+                  Expanded(
+                    flex: 4,
+                    child: QRView(
+                      key: qrKey,
+                      onQRViewCreated: _onQRViewCreated,
+                      overlay: QrScannerOverlayShape(
+                        borderColor: Colors.red,
+                        borderRadius: 10,
+                        borderLength: 30,
+                        borderWidth: 10,
+                        cutOutSize: 300,
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: FittedBox(
+                      fit: BoxFit.contain,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          RaisedButton(
+                            color: Colors.white,
+                            shape: CircleBorder(),
+                            onPressed: () {
+                              overlayEntry.remove();
+                            },
+                            child: Icon(Icons.close, color: Colors.red),
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              )),
+        );
+      },
+    );
+    Overlay.of(context).insert(overlayEntry);
+    controller?.resumeCamera();
+  }
+
+  _onQRViewCreated(QRViewController controller) {
+    this.controller = controller;
+    controller.scannedDataStream.listen((scanData) {
+      setState(() {
+        if (_produit.contains(scanData)) {
+          dropdownRef = scanData;
+          overlayEntry.remove();
+        } else {
+          overlayEntry.remove();
+          Flushbar(
+            message: "Produit Non Disponible",
+            duration: Duration(seconds: 3),
+          ).show(context);
+        }
+      });
+    });
   }
 }

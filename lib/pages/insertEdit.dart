@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:recrsi/models/models.dart';
 import 'package:recrsi/models/database.dart';
 import 'package:loading_overlay/loading_overlay.dart';
+import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class ProductPage extends StatefulWidget {
   ProductPage({Key key, this.title, this.row}) : super(key: key);
@@ -19,6 +20,9 @@ class _ProductPage extends State<ProductPage> {
   final prixAchat = TextEditingController();
   final prixVente = TextEditingController();
   bool _saving = false;
+  OverlayEntry overlayEntry;
+  final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
+  QRViewController controller;
 
   @override
   void initState() {
@@ -30,6 +34,12 @@ class _ProductPage extends State<ProductPage> {
       dispo.text = "${widget.row[5]}";
     }
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    controller?.dispose();
+    super.dispose();
   }
 
   @override
@@ -84,9 +94,15 @@ class _ProductPage extends State<ProductPage> {
                               TextField(
                                 decoration: InputDecoration(
                                     fillColor: Colors.red,
-                                    hintText: "Reference"),
+                                    suffix: IconButton(
+                                      icon: Icon(Icons.camera_alt_outlined,
+                                          color: Colors.red),
+                                      onPressed: () {
+                                        showQrCode();
+                                      },
+                                    ),
+                                    hintText: "Reference Produit"),
                                 controller: reference,
-                                enabled: widget.row == null ? true : false,
                               ),
                               TextField(
                                 decoration: InputDecoration(
@@ -301,5 +317,68 @@ class _ProductPage extends State<ProductPage> {
           },
         );
     }
+  }
+
+  void showQrCode() {
+    overlayEntry = OverlayEntry(
+      builder: (BuildContext context) {
+        return Positioned(
+          top: MediaQuery.of(context).size.height * 0.15,
+          left: MediaQuery.of(context).size.width * 0.05,
+          child: SizedBox(
+              width: MediaQuery.of(context).size.width * 0.9,
+              height: MediaQuery.of(context).size.height * 0.5,
+              child: Column(
+                children: [
+                  Expanded(
+                    flex: 4,
+                    child: QRView(
+                      key: qrKey,
+                      onQRViewCreated: _onQRViewCreated,
+                      overlay: QrScannerOverlayShape(
+                        borderColor: Colors.red,
+                        borderRadius: 10,
+                        borderLength: 30,
+                        borderWidth: 10,
+                        cutOutSize: 300,
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: FittedBox(
+                      fit: BoxFit.contain,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          RaisedButton(
+                            color: Colors.white,
+                            shape: CircleBorder(),
+                            onPressed: () {
+                              overlayEntry.remove();
+                            },
+                            child: Icon(Icons.close, color: Colors.red),
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              )),
+        );
+      },
+    );
+    Overlay.of(context).insert(overlayEntry);
+    controller?.resumeCamera();
+  }
+
+  _onQRViewCreated(QRViewController controller) {
+    this.controller = controller;
+    controller.scannedDataStream.listen((scanData) {
+      setState(() {
+        reference.text = scanData;
+      });
+      overlayEntry.remove();
+    });
   }
 }

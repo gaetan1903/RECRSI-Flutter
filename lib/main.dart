@@ -5,6 +5,8 @@ import 'pages/stat.dart';
 import 'models/database.dart';
 import 'package:loading_overlay/loading_overlay.dart';
 
+import 'package:flutter/cupertino.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -256,7 +258,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     fontFamily: "ProductSans",
                   ),
                 ),
-                leading: Icon(Icons.store, color: Colors.red),
+                leading: Icon(Icons.store_outlined, color: Colors.red),
                 onTap: () {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (BuildContext context) {
@@ -272,6 +274,51 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
                 leading: Icon(Icons.bar_chart_outlined, color: Colors.red),
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (BuildContext context) {
+                    return StatistiquePage();
+                  }));
+                },
+              ),
+              ListTile(
+                title: Text(
+                  "Pister Livreur",
+                  style: TextStyle(
+                    fontFamily: "ProductSans",
+                  ),
+                ),
+                leading: Icon(Icons.place_outlined, color: Colors.red),
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (BuildContext context) {
+                    return StatistiquePage();
+                  }));
+                },
+              ),
+              ListTile(
+                title: Text(
+                  "Administration",
+                  style: TextStyle(
+                    fontFamily: "ProductSans",
+                  ),
+                ),
+                leading: Icon(Icons.settings_outlined, color: Colors.red),
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (BuildContext context) {
+                    return StatistiquePage();
+                  }));
+                },
+              ),
+              ListTile(
+                title: Text(
+                  "A propos",
+                  style: TextStyle(
+                    fontFamily: "ProductSans",
+                  ),
+                ),
+                leading: Icon(Icons.info_outline, color: Colors.red),
                 onTap: () {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (BuildContext context) {
