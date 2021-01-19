@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:recrsi/models/database.dart';
+import 'package:recrsi/models/utils.dart';
 import 'package:recrsi/pages/insertEdit.dart';
 
 class GestionStockPage extends StatefulWidget {

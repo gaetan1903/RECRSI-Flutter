@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:loading_overlay/loading_overlay.dart';
 import 'package:month_picker_dialog/month_picker_dialog.dart';
-import 'package:recrsi/models/database.dart';
+import 'package:recrsi/models/utils.dart';
 
 class StatistiquePage extends StatefulWidget {
   @override

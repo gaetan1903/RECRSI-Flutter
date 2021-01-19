@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'pages/commande.dart';
 import 'pages/stock.dart';
 import 'pages/stat.dart';
-import 'models/database.dart';
+import 'pages/login.dart';
+import 'models/utils.dart';
 import 'package:loading_overlay/loading_overlay.dart';
 
 import 'package:flutter/cupertino.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(LoginPage());
 }
 
 class MyApp extends StatelessWidget {
@@ -31,6 +32,7 @@ class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
 
   final String title;
+  static String tag = "Homepage";
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -323,6 +325,21 @@ class _MyHomePageState extends State<MyHomePage> {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (BuildContext context) {
                     return StatistiquePage();
+                  }));
+                },
+              ),
+              ListTile(
+                title: Text(
+                  "Login",
+                  style: TextStyle(
+                    fontFamily: "ProductSans",
+                  ),
+                ),
+                leading: Icon(Icons.info_outline, color: Colors.red),
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (BuildContext context) {
+                    return LoginPage();
                   }));
                 },
               )
