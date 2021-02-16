@@ -185,7 +185,7 @@ class _StatistiquePage extends State<StatistiquePage> {
   _selectMonth() async {
     showMonthPicker(
       context: context,
-      firstDate: DateTime(DateTime.now().year, 5),
+      firstDate: DateTime(2021, 5),
       lastDate: DateTime(DateTime.now().year + 1, 9),
       initialDate: DateTime.now(),
       locale: Locale("fr"),
