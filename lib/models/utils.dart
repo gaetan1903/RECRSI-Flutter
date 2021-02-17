@@ -25,7 +25,7 @@ Future mainDB(List<String> condition) async {
   }
 }
 
-Future<bool> login(usr, passwd, {verif = false}) async {
+Future login(usr, passwd, {verif = false}) async {
   try {
     final conn = await MySqlConnection.connect(ConnectionSettings(
         host: host, port: port, user: user, password: password, db: db));
@@ -33,16 +33,16 @@ Future<bool> login(usr, passwd, {verif = false}) async {
     String condVerif = verif == true ? "?" : "password = SHA2(?, 224)";
 
     var res = await conn.query("""
-      SELECT True FROM Personnel
+      SELECT fonction FROM Personnel
       WHERE username = ? AND $condVerif
     """, [usr, passwd]);
 
     await conn.close();
 
-    return res.length == 1 ? true : false;
+    return res;
   } catch (err) {
     print(err);
-    return false;
+    return [];
   }
 }
 
@@ -275,6 +275,26 @@ Future statMonthly(DateTime day) async {
   } catch (err) {
     print(err);
     return null;
+  }
+}
+
+Future getFonction(String usr) async {
+  try {
+    final conn = await MySqlConnection.connect(ConnectionSettings(
+        host: host, port: port, user: user, password: password, db: db));
+
+    var res = await conn.query('''
+      SELECT fonction FROM Personnel WHERE username = ?
+    ''', [usr]);
+
+    await conn.close();
+    for (var r in res) {
+      return r[0];
+    }
+    return '';
+  } catch (err) {
+    print(err);
+    return "";
   }
 }
 

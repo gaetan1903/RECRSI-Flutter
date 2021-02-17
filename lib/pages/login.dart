@@ -61,17 +61,19 @@ class _LoginPageState extends State<LoginPage> {
         ),
         onPressed: () {
           Future connexion(usr, passwd) async {
-            bool res = await login(usr, passwd);
+            var res = await login(usr, passwd);
+            String fonction;
+            for (var r in res) fonction = r[0];
             setState(() {
               _loading = false;
             });
-            if (res == true) {
+            if (res.length == 1) {
               final prefs = await SharedPreferences.getInstance();
               prefs.clear();
               prefs.setString('login', usr);
               Navigator.push(context,
                   MaterialPageRoute(builder: (BuildContext context) {
-                return MyApp2();
+                return MyApp2(fonction: fonction);
               }));
             } else {
               return showDialog<void>(
@@ -108,6 +110,7 @@ class _LoginPageState extends State<LoginPage> {
             }
           }
 
+          FocusScope.of(context).unfocus();
           setState(() {
             _loading = true;
           });

@@ -9,6 +9,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/cupertino.dart';
 
 class MyApp2 extends StatelessWidget {
+  MyApp2({Key key, this.fonction}) : super(key: key);
+
+  final String fonction;
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -19,15 +22,19 @@ class MyApp2 extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       debugShowCheckedModeBanner: false,
-      home: MyHomePage(title: 'Livraison'),
+      home: MyHomePage(
+        title: 'Livraison',
+        fonction: fonction,
+      ),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key key, this.title, this.fonction}) : super(key: key);
 
   final String title;
+  final String fonction;
   static String tag = "Homepage";
 
   @override
@@ -48,11 +55,24 @@ class _MyHomePageState extends State<MyHomePage> {
   ];
   var db;
   bool _saving = false;
+  String _fonction;
 
   @override
   void initState() {
     super.initState();
     aff();
+    _fonction = widget.fonction;
+    //   Future<void> checkFonction() async {
+    //     final prefs = await SharedPreferences.getInstance();
+    //     final usr = prefs.getString('login') ?? '';
+    //     if (usr != '') _fonction = await getFonction(usr);
+
+    //     print(_fonction);
+    //   }
+
+    //   setState(() {
+    //     checkFonction();
+    //   });
   }
 
   Future<Null> aff() async {
@@ -214,123 +234,246 @@ class _MyHomePageState extends State<MyHomePage> {
         drawer: Drawer(
           child: ListView(
             padding: EdgeInsets.zero,
-            children: [
-              DrawerHeader(
-                  decoration: BoxDecoration(
-                      color: Color(0xFFBE0019),
-                      borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(25),
-                          bottomRight: Radius.circular(25))),
-                  child: Image.asset('assets/logo.png')),
-              ListTile(
-                title: Text(
-                  "Livraison",
-                  style: TextStyle(
-                    fontFamily: "ProductSans",
-                  ),
-                ),
-                leading: Icon(Icons.add_shopping_cart, color: Colors.red),
-                onTap: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-              ListTile(
-                title: Text(
-                  "Commande",
-                  style: TextStyle(
-                    fontFamily: "ProductSans",
-                  ),
-                ),
-                leading: Icon(Icons.add, color: Colors.red),
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (BuildContext context) {
-                    return CommandePage();
-                  }));
-                },
-              ),
-              ListTile(
-                title: Text(
-                  "Gestion de Stock",
-                  style: TextStyle(
-                    fontFamily: "ProductSans",
-                  ),
-                ),
-                leading: Icon(Icons.store_outlined, color: Colors.red),
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (BuildContext context) {
-                    return GestionStockPage();
-                  }));
-                },
-              ),
-              ListTile(
-                title: Text(
-                  "Statistique",
-                  style: TextStyle(
-                    fontFamily: "ProductSans",
-                  ),
-                ),
-                leading: Icon(Icons.bar_chart_outlined, color: Colors.red),
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (BuildContext context) {
-                    return StatistiquePage();
-                  }));
-                },
-              ),
-              ListTile(
-                title: Text(
-                  "Administration",
-                  style: TextStyle(
-                    fontFamily: "ProductSans",
-                  ),
-                ),
-                leading: Icon(Icons.settings_outlined, color: Colors.red),
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (BuildContext context) {
-                    return StatistiquePage();
-                  }));
-                },
-              ),
-              ListTile(
-                title: Text(
-                  "A propos",
-                  style: TextStyle(
-                    fontFamily: "ProductSans",
-                  ),
-                ),
-                leading: Icon(Icons.info_outline, color: Colors.red),
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (BuildContext context) {
-                    return StatistiquePage();
-                  }));
-                },
-              ),
-              ListTile(
-                title: Text(
-                  "Deconnexion",
-                  style: TextStyle(
-                    fontFamily: "ProductSans",
-                  ),
-                ),
-                leading: Icon(Icons.logout, color: Colors.red),
-                onTap: () {
-                  Future deconnexion() async {
-                    final prefs = await SharedPreferences.getInstance();
-                    prefs.clear();
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (BuildContext context) {
-                      return LoginPage();
-                    }));
-                  }
+            children: _fonction == "ADMIN"
+                ? [
+                    DrawerHeader(
+                        decoration: BoxDecoration(
+                            color: Color(0xFFBE0019),
+                            borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(25),
+                                bottomRight: Radius.circular(25))),
+                        child: Image.asset('assets/logo.png')),
+                    ListTile(
+                      title: Text(
+                        "Livraison",
+                        style: TextStyle(
+                          fontFamily: "ProductSans",
+                        ),
+                      ),
+                      leading: Icon(Icons.add_shopping_cart, color: Colors.red),
+                      onTap: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                    ListTile(
+                      title: Text(
+                        "Commande",
+                        style: TextStyle(
+                          fontFamily: "ProductSans",
+                        ),
+                      ),
+                      leading: Icon(Icons.add, color: Colors.red),
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (BuildContext context) {
+                          return CommandePage();
+                        }));
+                      },
+                    ),
+                    ListTile(
+                      title: Text(
+                        "Gestion de Stock",
+                        style: TextStyle(
+                          fontFamily: "ProductSans",
+                        ),
+                      ),
+                      leading: Icon(Icons.store_outlined, color: Colors.red),
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (BuildContext context) {
+                          return GestionStockPage();
+                        }));
+                      },
+                    ),
+                    ListTile(
+                      title: Text(
+                        "Statistique",
+                        style: TextStyle(
+                          fontFamily: "ProductSans",
+                        ),
+                      ),
+                      leading:
+                          Icon(Icons.bar_chart_outlined, color: Colors.red),
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (BuildContext context) {
+                          return StatistiquePage();
+                        }));
+                      },
+                    ),
+                    ListTile(
+                      title: Text(
+                        "Administration",
+                        style: TextStyle(
+                          fontFamily: "ProductSans",
+                        ),
+                      ),
+                      leading: Icon(Icons.settings_outlined, color: Colors.red),
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (BuildContext context) {
+                          return StatistiquePage();
+                        }));
+                      },
+                    ),
+                    ListTile(
+                      title: Text(
+                        "Deconnexion",
+                        style: TextStyle(
+                          fontFamily: "ProductSans",
+                        ),
+                      ),
+                      leading: Icon(Icons.logout, color: Colors.red),
+                      onTap: () {
+                        Future deconnexion() async {
+                          final prefs = await SharedPreferences.getInstance();
+                          prefs.clear();
+                          Navigator.push(context, MaterialPageRoute(
+                              builder: (BuildContext context) {
+                            return LoginPage();
+                          }));
+                        }
 
-                  deconnexion();
-                },
-              )
-            ],
+                        deconnexion();
+                      },
+                    )
+                  ]
+                : _fonction == "VENDEUR"
+                    ? [
+                        DrawerHeader(
+                            decoration: BoxDecoration(
+                                color: Color(0xFFBE0019),
+                                borderRadius: BorderRadius.only(
+                                    bottomLeft: Radius.circular(25),
+                                    bottomRight: Radius.circular(25))),
+                            child: Image.asset('assets/logo.png')),
+                        ListTile(
+                          title: Text(
+                            "Livraison",
+                            style: TextStyle(
+                              fontFamily: "ProductSans",
+                            ),
+                          ),
+                          leading:
+                              Icon(Icons.add_shopping_cart, color: Colors.red),
+                          onTap: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                        ListTile(
+                          title: Text(
+                            "Commande",
+                            style: TextStyle(
+                              fontFamily: "ProductSans",
+                            ),
+                          ),
+                          leading: Icon(Icons.add, color: Colors.red),
+                          onTap: () {
+                            Navigator.push(context, MaterialPageRoute(
+                                builder: (BuildContext context) {
+                              return CommandePage();
+                            }));
+                          },
+                        ),
+                        ListTile(
+                          title: Text(
+                            "Deconnexion",
+                            style: TextStyle(
+                              fontFamily: "ProductSans",
+                            ),
+                          ),
+                          leading: Icon(Icons.logout, color: Colors.red),
+                          onTap: () {
+                            Future deconnexion() async {
+                              final prefs =
+                                  await SharedPreferences.getInstance();
+                              prefs.clear();
+                              Navigator.push(context, MaterialPageRoute(
+                                  builder: (BuildContext context) {
+                                return LoginPage();
+                              }));
+                            }
+
+                            deconnexion();
+                          },
+                        )
+                      ]
+                    : _fonction == "LIVREUR"
+                        ? [
+                            DrawerHeader(
+                                decoration: BoxDecoration(
+                                    color: Color(0xFFBE0019),
+                                    borderRadius: BorderRadius.only(
+                                        bottomLeft: Radius.circular(25),
+                                        bottomRight: Radius.circular(25))),
+                                child: Image.asset('assets/logo.png')),
+                            ListTile(
+                              title: Text(
+                                "Livraison",
+                                style: TextStyle(
+                                  fontFamily: "ProductSans",
+                                ),
+                              ),
+                              leading: Icon(Icons.add_shopping_cart,
+                                  color: Colors.red),
+                              onTap: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                            ListTile(
+                              title: Text(
+                                "Deconnexion",
+                                style: TextStyle(
+                                  fontFamily: "ProductSans",
+                                ),
+                              ),
+                              leading: Icon(Icons.logout, color: Colors.red),
+                              onTap: () {
+                                Future deconnexion() async {
+                                  final prefs =
+                                      await SharedPreferences.getInstance();
+                                  prefs.clear();
+                                  Navigator.push(context, MaterialPageRoute(
+                                      builder: (BuildContext context) {
+                                    return LoginPage();
+                                  }));
+                                }
+
+                                deconnexion();
+                              },
+                            )
+                          ]
+                        : [
+                            DrawerHeader(
+                                decoration: BoxDecoration(
+                                    color: Color(0xFFBE0019),
+                                    borderRadius: BorderRadius.only(
+                                        bottomLeft: Radius.circular(25),
+                                        bottomRight: Radius.circular(25))),
+                                child: Image.asset('assets/logo.png')),
+                            ListTile(
+                              title: Text(
+                                "Deconnexion",
+                                style: TextStyle(
+                                  fontFamily: "ProductSans",
+                                ),
+                              ),
+                              leading: Icon(Icons.logout, color: Colors.red),
+                              onTap: () {
+                                Future deconnexion() async {
+                                  final prefs =
+                                      await SharedPreferences.getInstance();
+                                  prefs.clear();
+                                  Navigator.push(context, MaterialPageRoute(
+                                      builder: (BuildContext context) {
+                                    return LoginPage();
+                                  }));
+                                }
+
+                                deconnexion();
+                              },
+                            )
+                          ],
           ),
         ),
         body: LoadingOverlay(

@@ -22,12 +22,16 @@ class _MyAppState extends State<MyApp> {
     final prefs = await SharedPreferences.getInstance();
 
     final usr = prefs.getString('login') ?? '';
-    // prefs.remove('login');
-    bool res = await login(usr, '1', verif: true);
-    if (res == true) {
+    var res = await login(usr, '1', verif: true);
+
+    if (res.length == 1) {
+      String fonction;
+      for (var r in res) fonction = r[0];
       return Future.value(Navigator.push(context,
           MaterialPageRoute(builder: (BuildContext context) {
-        return MyApp2();
+        return MyApp2(
+          fonction: fonction,
+        );
       })));
     }
 
@@ -49,7 +53,7 @@ class _MyAppState extends State<MyApp> {
         ),
         styleTextUnderTheLoader: new TextStyle(),
         photoSize: 90,
-        onClick: () => print("Flutter Egypt"),
+        onClick: () => print("yess"),
         loaderColor: Colors.white);
   }
 }
