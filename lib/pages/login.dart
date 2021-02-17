@@ -87,7 +87,7 @@ class _LoginPageState extends State<LoginPage> {
                             fontFamily: "ProductSans")),
                     content: SingleChildScrollView(
                         child: Text(
-                      "Username ou Mot de passe incorrecte",
+                      "Username ou Mot de passe incorrecte\n\nVerifier votre Internet",
                       style: TextStyle(
                           color: Color(0xFFBE0019), fontFamily: "ProductSans"),
                     )),

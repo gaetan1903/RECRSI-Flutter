@@ -278,23 +278,22 @@ Future statMonthly(DateTime day) async {
   }
 }
 
-Future getFonction(String usr) async {
+Future<bool> updatePasswd(String usr, String passwd) async {
   try {
     final conn = await MySqlConnection.connect(ConnectionSettings(
         host: host, port: port, user: user, password: password, db: db));
 
-    var res = await conn.query('''
-      SELECT fonction FROM Personnel WHERE username = ?
-    ''', [usr]);
+    await conn.query('''
+      UPDATE Personnel SET password = SHA2(?, 224)
+      WHERE username = ?
+    ''', [passwd, usr]);
 
     await conn.close();
-    for (var r in res) {
-      return r[0];
-    }
-    return '';
+
+    return true;
   } catch (err) {
     print(err);
-    return "";
+    return false;
   }
 }
 
