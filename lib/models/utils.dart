@@ -25,6 +25,27 @@ Future mainDB(List<String> condition) async {
   }
 }
 
+Future<bool> login(usr, passwd, {verif = false}) async {
+  try {
+    final conn = await MySqlConnection.connect(ConnectionSettings(
+        host: host, port: port, user: user, password: password, db: db));
+
+    String condVerif = verif == true ? "?" : "password = SHA2(?, 224)";
+
+    var res = await conn.query("""
+      SELECT True FROM Personnel
+      WHERE username = ? AND $condVerif
+    """, [usr, passwd]);
+
+    await conn.close();
+
+    return res.length == 1 ? true : false;
+  } catch (err) {
+    print(err);
+    return false;
+  }
+}
+
 Future<bool> insertCommande(Commande commande) async {
   try {
     final conn = await MySqlConnection.connect(ConnectionSettings(

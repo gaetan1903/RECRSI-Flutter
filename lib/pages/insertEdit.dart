@@ -56,7 +56,7 @@ class _ProductPage extends State<ProductPage> {
         body: LoadingOverlay(
             color: Colors.black,
             progressIndicator: CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.red),
+              valueColor: AlwaysStoppedAnimation<Color>(Color(0xFFBE0019)),
               strokeWidth: 2,
             ),
             child: Center(
@@ -83,20 +83,20 @@ class _ProductPage extends State<ProductPage> {
                                   child: Text("Nouveau Produit",
                                       style: TextStyle(
                                           fontSize: 16,
-                                          color: Colors.red,
+                                          color: Color(0xFFBE0019),
                                           fontFamily: "ProductSans"))),
                               TextField(
                                 decoration: InputDecoration(
-                                    fillColor: Colors.red,
+                                    fillColor: Color(0xFFBE0019),
                                     hintText: "Nom Produit"),
                                 controller: nomProduit,
                               ),
                               TextField(
                                 decoration: InputDecoration(
-                                    fillColor: Colors.red,
+                                    fillColor: Color(0xFFBE0019),
                                     suffix: IconButton(
                                       icon: Icon(Icons.camera_alt_outlined,
-                                          color: Colors.red),
+                                          color: Color(0xFFBE0019)),
                                       onPressed: () {
                                         showQrCode();
                                       },
@@ -106,20 +106,21 @@ class _ProductPage extends State<ProductPage> {
                               ),
                               TextField(
                                 decoration: InputDecoration(
-                                    fillColor: Colors.red, hintText: "Stock"),
+                                    fillColor: Color(0xFFBE0019),
+                                    hintText: "Stock"),
                                 keyboardType: TextInputType.number,
                                 controller: dispo,
                               ),
                               TextField(
                                 decoration: InputDecoration(
-                                    fillColor: Colors.red,
+                                    fillColor: Color(0xFFBE0019),
                                     hintText: "Prix d'Achat"),
                                 keyboardType: TextInputType.number,
                                 controller: prixAchat,
                               ),
                               TextField(
                                 decoration: InputDecoration(
-                                    fillColor: Colors.red,
+                                    fillColor: Color(0xFFBE0019),
                                     hintText: "Prix de Vente"),
                                 keyboardType: TextInputType.number,
                                 controller: prixVente,
@@ -131,10 +132,10 @@ class _ProductPage extends State<ProductPage> {
                                       _confirmProduit();
                                     },
                                     elevation: 10,
-                                    color: Colors.red,
+                                    color: Color(0xFFBE0019),
                                     textColor: Colors.white,
                                     padding: EdgeInsets.all(8.0),
-                                    splashColor: Colors.redAccent,
+                                    splashColor: Color(0xFFBE0019),
                                     child: Text(
                                       "Valider",
                                       style: TextStyle(
@@ -208,7 +209,7 @@ class _ProductPage extends State<ProductPage> {
                   child: Text(
                 "Une erreur s'est produite",
                 style: TextStyle(
-                    color: Colors.redAccent, fontFamily: "ProductSans"),
+                    color: Color(0xFFBE0019), fontFamily: "ProductSans"),
               )),
               actions: <Widget>[
                 FlatButton(
@@ -254,7 +255,7 @@ class _ProductPage extends State<ProductPage> {
                   child: Text(
                 retVal,
                 style: TextStyle(
-                    color: Colors.redAccent, fontFamily: "ProductSans"),
+                    color: Color(0xFFBE0019), fontFamily: "ProductSans"),
               )),
               actions: <Widget>[
                 FlatButton(
@@ -336,7 +337,7 @@ class _ProductPage extends State<ProductPage> {
                       key: qrKey,
                       onQRViewCreated: _onQRViewCreated,
                       overlay: QrScannerOverlayShape(
-                        borderColor: Colors.red,
+                        borderColor: Color(0xFFBE0019),
                         borderRadius: 10,
                         borderLength: 30,
                         borderWidth: 10,
@@ -357,7 +358,7 @@ class _ProductPage extends State<ProductPage> {
                             onPressed: () {
                               overlayEntry.remove();
                             },
-                            child: Icon(Icons.close, color: Colors.red),
+                            child: Icon(Icons.close, color: Color(0xFFBE0019)),
                           ),
                         ],
                       ),

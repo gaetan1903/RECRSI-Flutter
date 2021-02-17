@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:splashscreen/splashscreen.dart';
-// import 'pages/commande.dart';
-// import 'pages/stock.dart';
-// import 'pages/stat.dart';
-// import 'pages/login.dart';
-// import 'models/utils.dart';
-// import 'package:loading_overlay/loading_overlay.dart';
-
-import 'package:flutter/cupertino.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'pages/login.dart';
+import 'models/utils.dart';
+import 'pages/livraison.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(new MaterialApp(
+    home: new MyApp(),
+    debugShowCheckedModeBanner: false,
+  ));
 }
 
 class MyApp extends StatefulWidget {
@@ -19,37 +18,38 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  Future<Widget> loadFromFuture() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    final usr = prefs.getString('login') ?? '';
+    // prefs.remove('login');
+    bool res = await login(usr, '1', verif: true);
+    if (res == true) {
+      return Future.value(Navigator.push(context,
+          MaterialPageRoute(builder: (BuildContext context) {
+        return MyApp2();
+      })));
+    }
+
+    return Future.value(LoginPage());
+  }
+
   @override
   Widget build(BuildContext context) {
     return new SplashScreen(
-        seconds: 14,
-        navigateAfterSeconds: new AfterSplash(),
-        title: new Text(
-          'Welcome In SplashScreen',
-          style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
+        navigateAfterFuture: loadFromFuture(),
+        image: new Image.asset('assets/logo.png'),
+        backgroundColor: Color(0xFFBE0019),
+        loadingText: new Text(
+          "chargement...",
+          style: TextStyle(
+            color: Colors.white,
+            fontFamily: "ProductSans",
+          ),
         ),
-        image: new Image.network('https://i.imgur.com/TyCSG9A.png'),
-        backgroundColor: Colors.white,
         styleTextUnderTheLoader: new TextStyle(),
-        photoSize: 100.0,
+        photoSize: 90,
         onClick: () => print("Flutter Egypt"),
-        loaderColor: Colors.red);
-  }
-}
-
-class AfterSplash extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-          title: new Text("Welcome In SplashScreen Package"),
-          automaticallyImplyLeading: false),
-      body: new Center(
-        child: new Text(
-          "Done!",
-          style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),
-        ),
-      ),
-    );
+        loaderColor: Colors.white);
   }
 }

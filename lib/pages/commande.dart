@@ -93,7 +93,7 @@ class _CommandePage extends State<CommandePage> {
       body: LoadingOverlay(
           color: Colors.black,
           progressIndicator: CircularProgressIndicator(
-            valueColor: AlwaysStoppedAnimation<Color>(Colors.red),
+            valueColor: AlwaysStoppedAnimation<Color>(Color(0xFFBE0019)),
             strokeWidth: 2,
           ),
           child: Center(
@@ -119,14 +119,14 @@ class _CommandePage extends State<CommandePage> {
                                 child: Text("Nouvelle Commande",
                                     style: TextStyle(
                                         fontSize: 16,
-                                        color: Colors.red,
+                                        color: Color(0xFFBE0019),
                                         fontFamily: "ProductSans"))),
                             DropdownButton<String>(
                                 value: dropdownRef,
                                 isExpanded: true,
                                 icon: IconButton(
                                   icon: Icon(Icons.camera_alt_outlined,
-                                      color: Colors.red),
+                                      color: Color(0xFFBE0019)),
                                   onPressed: () {
                                     showQrCode();
                                   },
@@ -155,30 +155,33 @@ class _CommandePage extends State<CommandePage> {
                                 }).toList()),
                             TextField(
                               decoration: InputDecoration(
-                                  fillColor: Colors.red, hintText: "Quantité"),
+                                  fillColor: Color(0xFFBE0019),
+                                  hintText: "Quantité"),
                               keyboardType: TextInputType.number,
                               controller: quantite,
                             ),
                             TextField(
                               decoration: InputDecoration(
-                                  fillColor: Colors.red, hintText: "Adresse"),
+                                  fillColor: Color(0xFFBE0019),
+                                  hintText: "Adresse"),
                               controller: adresse,
                             ),
                             TextField(
                               decoration: InputDecoration(
-                                  fillColor: Colors.red, hintText: "Contact"),
+                                  fillColor: Color(0xFFBE0019),
+                                  hintText: "Contact"),
                               keyboardType: TextInputType.number,
                               controller: contact,
                             ),
                             TextField(
                               decoration: InputDecoration(
-                                  fillColor: Colors.red,
+                                  fillColor: Color(0xFFBE0019),
                                   hintText: "Nom du client"),
                               controller: nomClient,
                             ),
                             TextField(
                               decoration: InputDecoration(
-                                fillColor: Colors.red,
+                                fillColor: Color(0xFFBE0019),
                                 hintText: "Date de Livraison",
                               ),
                               keyboardType: null,
@@ -202,9 +205,9 @@ class _CommandePage extends State<CommandePage> {
                                           dateLivraison.text = "";
                                         });
                                       },
-                                      textColor: Colors.red,
+                                      textColor: Color(0xFFBE0019),
                                       padding: EdgeInsets.all(8.0),
-                                      splashColor: Colors.red,
+                                      splashColor: Color(0xFFBE0019),
                                       child: Text(
                                         "EFFACER",
                                         style: TextStyle(
@@ -219,10 +222,10 @@ class _CommandePage extends State<CommandePage> {
                                             },
                                       elevation: 6,
                                       disabledColor: Colors.grey,
-                                      color: Colors.red,
+                                      color: Color(0xFFBE0019),
                                       textColor: Colors.white,
                                       padding: EdgeInsets.all(8.0),
-                                      splashColor: Colors.redAccent,
+                                      splashColor: Color(0xFFBE0019),
                                       child: Text(
                                         "VALIDER",
                                         style: TextStyle(
@@ -305,7 +308,7 @@ class _CommandePage extends State<CommandePage> {
                   child: Text(
                 "Une erreur s'est produite",
                 style: TextStyle(
-                    color: Colors.redAccent, fontFamily: "ProductSans"),
+                    color: Color(0xFFBE0019), fontFamily: "ProductSans"),
               )),
               actions: <Widget>[
                 FlatButton(
@@ -351,7 +354,7 @@ class _CommandePage extends State<CommandePage> {
                   child: Text(
                 retVal,
                 style: TextStyle(
-                    color: Colors.redAccent, fontFamily: "ProductSans"),
+                    color: Color(0xFFBE0019), fontFamily: "ProductSans"),
               )),
               actions: <Widget>[
                 FlatButton(
@@ -437,7 +440,7 @@ class _CommandePage extends State<CommandePage> {
                       key: qrKey,
                       onQRViewCreated: _onQRViewCreated,
                       overlay: QrScannerOverlayShape(
-                        borderColor: Colors.red,
+                        borderColor: Color(0xFFBE0019),
                         borderRadius: 10,
                         borderLength: 30,
                         borderWidth: 10,
@@ -458,7 +461,7 @@ class _CommandePage extends State<CommandePage> {
                             onPressed: () {
                               overlayEntry.remove();
                             },
-                            child: Icon(Icons.close, color: Colors.red),
+                            child: Icon(Icons.close, color: Color(0xFFBE0019)),
                           ),
                         ],
                       ),

@@ -32,6 +32,8 @@ dependencies:
         url: git://github.com/juliuscanute/qr_code_scanner.git
   flushbar: ^1.10.4
   splashscreen:
+  hash: ^1.0.1
+  shared_preferences: ^0.5.12+4
 
 
   # The following adds the Cupertino Icons font to your application.

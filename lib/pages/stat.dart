@@ -57,7 +57,7 @@ class _StatistiquePage extends State<StatistiquePage> {
             style: TextStyle(fontFamily: "ProductSans")),
         subtitle: Text("nombre: ${row[2]} \nbenefice: ${beautyNumber(row[3])}",
             style: TextStyle(fontFamily: "ProductSans")),
-        leading: Icon(Icons.details, color: Colors.red),
+        leading: Icon(Icons.details, color: Color(0xFFBE0019)),
       ));
     }
 
@@ -77,7 +77,7 @@ class _StatistiquePage extends State<StatistiquePage> {
                   children: detailProduit,
                 )),
             FlatButton(
-              textColor: Colors.red,
+              textColor: Color(0xFFBE0019),
               onPressed: () {
                 Navigator.pop(context);
               },
@@ -234,7 +234,8 @@ class _StatistiquePage extends State<StatistiquePage> {
                     child: LoadingOverlay(
                         color: Colors.white,
                         progressIndicator: CircularProgressIndicator(
-                          valueColor: AlwaysStoppedAnimation<Color>(Colors.red),
+                          valueColor:
+                              AlwaysStoppedAnimation<Color>(Color(0xFFBE0019)),
                           strokeWidth: 2,
                         ),
                         child: Column(
@@ -243,12 +244,12 @@ class _StatistiquePage extends State<StatistiquePage> {
                               Text("Stat Journalier",
                                   style: TextStyle(
                                       fontSize: 20,
-                                      color: Colors.red,
+                                      color: Color(0xFFBE0019),
                                       fontFamily: "ProductSans")),
                               TextField(
                                 style: TextStyle(fontFamily: "ProductSans"),
                                 decoration: InputDecoration(
-                                  fillColor: Colors.red,
+                                  fillColor: Color(0xFFBE0019),
                                   hintText: "Statistique Date",
                                 ),
                                 keyboardType: null,
@@ -262,7 +263,8 @@ class _StatistiquePage extends State<StatistiquePage> {
                                       children: [
                                     TextSpan(
                                         text: "Livrée:   ",
-                                        style: TextStyle(color: Colors.red)),
+                                        style: TextStyle(
+                                            color: Color(0xFFBE0019))),
                                     TextSpan(
                                         text: "  ${beautyNumber(_dlivr)}",
                                         style: TextStyle(color: Colors.black)),
@@ -274,7 +276,8 @@ class _StatistiquePage extends State<StatistiquePage> {
                                       children: [
                                     TextSpan(
                                         text: "Benéfice:   ",
-                                        style: TextStyle(color: Colors.red)),
+                                        style: TextStyle(
+                                            color: Color(0xFFBE0019))),
                                     TextSpan(
                                         text: "  ${beautyNumber(_dbenf)}",
                                         style: TextStyle(color: Colors.black)),
@@ -288,7 +291,7 @@ class _StatistiquePage extends State<StatistiquePage> {
                                         'date_stat = "${statD.year}-${statD.month}-${statD.day}"';
                                     _getDetail(cond);
                                   },
-                                  color: Colors.red,
+                                  color: Color(0xFFBE0019),
                                   textColor: Colors.white,
                                   child: Text(
                                     "Détails",
@@ -309,7 +312,8 @@ class _StatistiquePage extends State<StatistiquePage> {
                   child: LoadingOverlay(
                       color: Colors.white,
                       progressIndicator: CircularProgressIndicator(
-                        valueColor: AlwaysStoppedAnimation<Color>(Colors.red),
+                        valueColor:
+                            AlwaysStoppedAnimation<Color>(Color(0xFFBE0019)),
                         strokeWidth: 2,
                       ),
                       child: Column(
@@ -318,12 +322,12 @@ class _StatistiquePage extends State<StatistiquePage> {
                             Text("Stat Mensuel",
                                 style: TextStyle(
                                     fontSize: 20,
-                                    color: Colors.red,
+                                    color: Color(0xFFBE0019),
                                     fontFamily: "ProductSans")),
                             TextField(
                               style: TextStyle(fontFamily: "ProductSans"),
                               decoration: InputDecoration(
-                                fillColor: Colors.red,
+                                fillColor: Color(0xFFBE0019),
                                 hintText: "Statistique Date",
                               ),
                               keyboardType: null,
@@ -336,7 +340,8 @@ class _StatistiquePage extends State<StatistiquePage> {
                                     children: [
                                   TextSpan(
                                       text: "Livrée:   ",
-                                      style: TextStyle(color: Colors.red)),
+                                      style:
+                                          TextStyle(color: Color(0xFFBE0019))),
                                   TextSpan(
                                       text: "  ${beautyNumber(_mlivr)}",
                                       style: TextStyle(color: Colors.black)),
@@ -347,7 +352,8 @@ class _StatistiquePage extends State<StatistiquePage> {
                                     children: [
                                   TextSpan(
                                       text: "Benéfice:   ",
-                                      style: TextStyle(color: Colors.red)),
+                                      style:
+                                          TextStyle(color: Color(0xFFBE0019))),
                                   TextSpan(
                                       text: "  ${beautyNumber(_mbenf)}",
                                       style: TextStyle(color: Colors.black)),
@@ -361,7 +367,7 @@ class _StatistiquePage extends State<StatistiquePage> {
                                       'MONTH(date_stat) = "${statM.month}" AND YEAR(date_stat) = "${statM.year}" ';
                                   _getDetail(cond);
                                 },
-                                color: Colors.red,
+                                color: Color(0xFFBE0019),
                                 textColor: Colors.white,
                                 child: Text(
                                   "Détails",

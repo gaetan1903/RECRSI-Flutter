@@ -13,7 +13,7 @@ class _GestionStockPage extends State<GestionStockPage> {
   List<Widget> produit = [];
   Widget _onProduit = CircularProgressIndicator(
       backgroundColor: Colors.white,
-      valueColor: AlwaysStoppedAnimation(Colors.red));
+      valueColor: AlwaysStoppedAnimation(Color(0xFFBE0019)));
   TextEditingController _keySearch = TextEditingController();
   String query = "1";
 
@@ -47,12 +47,13 @@ class _GestionStockPage extends State<GestionStockPage> {
                 ),
               ),
               FlatButton(
-                  textColor: Colors.red,
+                  textColor: Color(0xFFBE0019),
                   onPressed: () {
                     setState(() {
                       _onProduit = CircularProgressIndicator(
                           backgroundColor: Colors.white,
-                          valueColor: AlwaysStoppedAnimation(Colors.red));
+                          valueColor:
+                              AlwaysStoppedAnimation(Color(0xFFBE0019)));
                     });
                     aff();
                   },
@@ -81,12 +82,12 @@ class _GestionStockPage extends State<GestionStockPage> {
               ),
             ),
             FlatButton(
-                textColor: Colors.red,
+                textColor: Color(0xFFBE0019),
                 onPressed: () {
                   setState(() {
                     _onProduit = CircularProgressIndicator(
                         backgroundColor: Colors.white,
-                        valueColor: AlwaysStoppedAnimation(Colors.red));
+                        valueColor: AlwaysStoppedAnimation(Color(0xFFBE0019)));
                   });
                   aff();
                 },
@@ -108,7 +109,7 @@ class _GestionStockPage extends State<GestionStockPage> {
             icon = Icon(Icons.error, color: Colors.orange);
           } else {
             subtitle = "Stock epuisé ";
-            icon = Icon(Icons.error, color: Colors.red);
+            icon = Icon(Icons.error, color: Color(0xFFBE0019));
           }
 
           produit.add(ListTile(
@@ -188,7 +189,7 @@ class _GestionStockPage extends State<GestionStockPage> {
                       width: MediaQuery.of(context).size.width * 0.5,
                       child: TextField(
                         decoration: InputDecoration(
-                            fillColor: Colors.red,
+                            fillColor: Color(0xFFBE0019),
                             hintText: "Rechercher ici..."),
                         controller: _keySearch,
                       ),
@@ -196,7 +197,7 @@ class _GestionStockPage extends State<GestionStockPage> {
                     IconButton(
                         icon: Icon(
                           Icons.search,
-                          color: Colors.red,
+                          color: Color(0xFFBE0019),
                         ),
                         onPressed: () {
                           String val = _keySearch.text.trim();
@@ -209,7 +210,8 @@ class _GestionStockPage extends State<GestionStockPage> {
                             produit.clear();
                             _onProduit = CircularProgressIndicator(
                                 backgroundColor: Colors.white,
-                                valueColor: AlwaysStoppedAnimation(Colors.red));
+                                valueColor:
+                                    AlwaysStoppedAnimation(Color(0xFFBE0019)));
                           });
                           aff();
                         })
@@ -253,7 +255,7 @@ class _GestionStockPage extends State<GestionStockPage> {
             ListTile(
               leading: Icon(
                 Icons.title,
-                color: Colors.red,
+                color: Color(0xFFBE0019),
               ),
               title: Text(
                 "${row[2]} - ${row[1]}",
@@ -263,7 +265,7 @@ class _GestionStockPage extends State<GestionStockPage> {
             ListTile(
               leading: Icon(
                 Icons.format_list_numbered,
-                color: Colors.red,
+                color: Color(0xFFBE0019),
               ),
               title: Text(
                 "dispo: ${row[5]}",
@@ -276,7 +278,7 @@ class _GestionStockPage extends State<GestionStockPage> {
             ListTile(
               leading: Icon(
                 Icons.add_shopping_cart,
-                color: Colors.red,
+                color: Color(0xFFBE0019),
               ),
               title: Text(
                 "en commande:  ${row[6]}",
@@ -289,7 +291,7 @@ class _GestionStockPage extends State<GestionStockPage> {
             ListTile(
               leading: Icon(
                 Icons.attach_money,
-                color: Colors.red,
+                color: Color(0xFFBE0019),
               ),
               title: Text(
                 "Achat: ${beautyNumber(row[3])}",
@@ -302,7 +304,7 @@ class _GestionStockPage extends State<GestionStockPage> {
             ListTile(
               leading: Icon(
                 Icons.attach_money,
-                color: Colors.red,
+                color: Color(0xFFBE0019),
               ),
               title: Text(
                 "Vente: ${beautyNumber(row[4])}",
@@ -313,7 +315,7 @@ class _GestionStockPage extends State<GestionStockPage> {
               onTap: () {},
             ),
             FlatButton(
-                textColor: Colors.red,
+                textColor: Color(0xFFBE0019),
                 color: Colors.white,
                 onPressed: () {
                   Navigator.of(context).pop();
