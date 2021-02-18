@@ -89,7 +89,7 @@ Future prodDispo() async {
         host: host, port: port, user: user, password: password, db: db));
 
     var results = await conn.query('''
-      SELECT reference FROM Produit WHERE dispo > 0
+      SELECT reference, dispo FROM Produit WHERE dispo > 0
      ''');
 
     await conn.close();

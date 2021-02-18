@@ -20,6 +20,7 @@ class _CommandePage extends State<CommandePage> {
   DateTime _dateLivraison = DateTime.now();
   FocusNode _focus = FocusNode();
   List<String> _produit = ["Reference Produit"];
+  List<int> _produitStock = [0];
   bool isDisable = false;
   bool _saving = false;
   OverlayEntry overlayEntry;
@@ -47,6 +48,7 @@ class _CommandePage extends State<CommandePage> {
     setState(() {
       for (var row in allprod) {
         _produit.add(row[0]);
+        _produitStock.add(row[1]);
       }
       _saving = false;
     });
@@ -340,7 +342,16 @@ class _CommandePage extends State<CommandePage> {
         retVal = "Champ contact doit être défini";
       else if (dateLivraison.text == "")
         retVal = "Date de livraison doit être défini";
-
+      int _count = 0;
+      for (String pd in _produit) {
+        if (pd == dropdownRef) {
+          if (int.parse(quantite.text) > _produitStock[_count])
+            retVal =
+                "Désolé, Il ne reste que ${_produitStock[_count]} en stock";
+          break;
+        }
+        _count++;
+      }
       if (retVal != null) {
         return showDialog<void>(
           context: context,
