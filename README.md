@@ -1,6 +1,13 @@
 # RECRSI Flutter
 
+gg
 C'est une application de gestion de magasin, réalisée en Flutter 
+
+
+[![Android](https://img.shields.io/badge/Android-yes-teal.svg)](#README)
+[![Open Source Love svg1](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](#README)
+[![Version](https://img.shields.io/badge/Version-1.0.2-teal)](https://github.com/FoyerSociety/Fiche-metier/releases)
+
 
 <table >
   
