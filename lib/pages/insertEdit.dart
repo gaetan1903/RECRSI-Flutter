@@ -377,7 +377,7 @@ class _ProductPage extends State<ProductPage> {
     this.controller = controller;
     controller.scannedDataStream.listen((scanData) {
       setState(() {
-        reference.text = scanData;
+        reference.text = scanData.code;
       });
       overlayEntry.remove();
     });

@@ -20,6 +20,7 @@ class _CommandePage extends State<CommandePage> {
   DateTime _dateLivraison = DateTime.now();
   FocusNode _focus = FocusNode();
   List<String> _produit = ["Reference Produit"];
+  List<String> _produitTmp = ["Reference Produit"];
   List<int> _produitStock = [0];
   bool isDisable = false;
   bool _saving = false;
@@ -47,7 +48,8 @@ class _CommandePage extends State<CommandePage> {
     var allprod = await prodDispo();
     setState(() {
       for (var row in allprod) {
-        _produit.add(row[0]);
+        _produit.add("${row[2]} -- ${row[0]}");
+        _produitTmp.add(row[0]);
         _produitStock.add(row[1]);
       }
       _saving = false;
@@ -87,6 +89,7 @@ class _CommandePage extends State<CommandePage> {
                   _saving = true;
                   dropdownRef = "Reference Produit";
                   _produit = ["Reference Produit"];
+                  _produitTmp = ["Reference Produit"];
                 });
                 listProd();
               },
@@ -247,7 +250,9 @@ class _CommandePage extends State<CommandePage> {
   Future<void> _confirmCommande({bool validate: false}) async {
     if (validate) {
       Commande commande = Commande(
-          refProduit: dropdownRef,
+          refProduit: dropdownRef.contains('--')
+              ? dropdownRef.split('--')[1].trim()
+              : dropdownRef,
           quantite: int.parse(quantite.text),
           adresse: adresse.text,
           contact: contact.text,
@@ -491,17 +496,17 @@ class _CommandePage extends State<CommandePage> {
     this.controller = controller;
     controller.scannedDataStream.listen((scanData) {
       setState(() {
-        if (_produit.contains(scanData)) {
-          dropdownRef = scanData;
+        if (_produitTmp.contains(scanData.code)) {
           overlayEntry.remove();
+          dropdownRef = _produit[_produitTmp.indexOf(scanData.code)];
         } else {
-          overlayEntry.remove();
           Flushbar(
             message: "Produit Non Disponible",
             duration: Duration(seconds: 3),
           ).show(context);
         }
       });
+      overlayEntry.remove();
     });
   }
 }
