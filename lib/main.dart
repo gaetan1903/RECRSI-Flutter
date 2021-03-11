@@ -53,7 +53,6 @@ class _MyAppState extends State<MyApp> {
         ),
         styleTextUnderTheLoader: new TextStyle(),
         photoSize: 90,
-        onClick: () => print("yess"),
         loaderColor: Colors.white);
   }
 }
