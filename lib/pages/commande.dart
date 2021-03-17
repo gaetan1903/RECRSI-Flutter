@@ -46,12 +46,12 @@ class _CommandePage extends State<CommandePage> {
 
   Future<Null> listProd() async {
     var allprod = await prodDispo();
+    for (var row in allprod) {
+      _produit.add("${row[2]} -- ${row[0]}");
+      _produitTmp.add(row[0]);
+      _produitStock.add(row[1]);
+    }
     setState(() {
-      for (var row in allprod) {
-        _produit.add("${row[2]} -- ${row[0]}");
-        _produitTmp.add(row[0]);
-        _produitStock.add(row[1]);
-      }
       _saving = false;
     });
   }
@@ -282,6 +282,7 @@ class _CommandePage extends State<CommandePage> {
               )),
               actions: <Widget>[
                 FlatButton(
+                  textColor: Color(0xFFBE0019),
                   child: Text(
                     'Fermer',
                     style: TextStyle(
@@ -319,6 +320,7 @@ class _CommandePage extends State<CommandePage> {
               )),
               actions: <Widget>[
                 FlatButton(
+                  textColor: Color(0xFFBE0019),
                   child: Text(
                     'Fermer',
                     style: TextStyle(
@@ -347,16 +349,19 @@ class _CommandePage extends State<CommandePage> {
         retVal = "Champ contact doit être défini";
       else if (dateLivraison.text == "")
         retVal = "Date de livraison doit être défini";
-      int _count = 0;
-      for (String pd in _produit) {
-        if (pd == dropdownRef) {
-          if (int.parse(quantite.text) > _produitStock[_count])
-            retVal =
-                "Désolé, Il ne reste que ${_produitStock[_count]} en stock";
-          break;
+      else {
+        int _count = 0;
+        for (String pd in _produit) {
+          if (pd == dropdownRef) {
+            if (int.parse(quantite.text) > _produitStock[_count])
+              retVal =
+                  "Désolé, Il ne reste que ${_produitStock[_count]} en stock";
+            break;
+          }
+          _count++;
         }
-        _count++;
       }
+
       if (retVal != null) {
         return showDialog<void>(
           context: context,
@@ -374,6 +379,7 @@ class _CommandePage extends State<CommandePage> {
               )),
               actions: <Widget>[
                 FlatButton(
+                  textColor: Color(0xFFBE0019),
                   child: Text(
                     'Fermer',
                     style: TextStyle(
@@ -406,6 +412,7 @@ class _CommandePage extends State<CommandePage> {
               )),
               actions: <Widget>[
                 FlatButton(
+                  textColor: Color(0xFFBE0019),
                   child: Text(
                     'Annulé',
                     style: TextStyle(
@@ -417,6 +424,7 @@ class _CommandePage extends State<CommandePage> {
                   },
                 ),
                 FlatButton(
+                  textColor: Color(0xFFBE0019),
                   child: Text(
                     'Continuer',
                     style: TextStyle(
