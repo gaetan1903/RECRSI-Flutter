@@ -105,9 +105,6 @@ Future<bool> majStatus(String status, int id, int quantite) async {
     final conn = await MySqlConnection.connect(ConnectionSettings(
         host: host, port: port, user: user, password: password, db: db));
 
-    await conn
-        .query('UPDATE Commande SET status = ? WHERE id = ?', [status, id]);
-
     String condition;
 
     if (status == "LIVREE")
@@ -122,6 +119,9 @@ Future<bool> majStatus(String status, int id, int quantite) async {
       UPDATE Produit SET $condition WHERE reference = (
         SELECT ref_produit FROM Commande WHERE id = ?
       )''', [id]);
+
+    await conn
+        .query('UPDATE Commande SET status = ? WHERE id = ?', [status, id]);
 
     await conn.close();
 
