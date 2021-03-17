@@ -137,7 +137,9 @@ class _ProductPage extends State<ProductPage> {
                                     padding: EdgeInsets.all(8.0),
                                     splashColor: Color(0xFFBE0019),
                                     child: Text(
-                                      "Valider",
+                                      widget.row == null
+                                          ? "Enregistrer"
+                                          : "Mettre à jour",
                                       style: TextStyle(
                                         fontFamily: "ProductSans",
                                       ),
@@ -176,12 +178,15 @@ class _ProductPage extends State<ProductPage> {
                       color: Color(0xFF464637), fontFamily: "ProductSans")),
               content: SingleChildScrollView(
                   child: Text(
-                "Operation effectuée",
+                widget.row == null
+                    ? "Insertion effectuée"
+                    : "Modification effectuée",
                 style:
                     TextStyle(color: Colors.green, fontFamily: "ProductSans"),
               )),
               actions: <Widget>[
                 FlatButton(
+                  textColor: Color(0xFFBE0019),
                   child: Text(
                     'Fermer',
                     style: TextStyle(
@@ -213,6 +218,7 @@ class _ProductPage extends State<ProductPage> {
               )),
               actions: <Widget>[
                 FlatButton(
+                  textColor: Color(0xFFBE0019),
                   child: Text(
                     'Fermer',
                     style: TextStyle(
@@ -259,6 +265,7 @@ class _ProductPage extends State<ProductPage> {
               )),
               actions: <Widget>[
                 FlatButton(
+                  textColor: Color(0xFFBE0019),
                   child: Text('Fermer'),
                   onPressed: () {
                     Navigator.of(context).pop();
@@ -288,6 +295,7 @@ class _ProductPage extends State<ProductPage> {
               )),
               actions: <Widget>[
                 FlatButton(
+                  textColor: Color(0xFFBE0019),
                   child: Text(
                     'Annulé',
                     style: TextStyle(
@@ -299,6 +307,7 @@ class _ProductPage extends State<ProductPage> {
                   },
                 ),
                 FlatButton(
+                  textColor: Color(0xFFBE0019),
                   child: Text(
                     'Continuer',
                     style: TextStyle(
