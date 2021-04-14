@@ -27,12 +27,9 @@ class _MyAppState extends State<MyApp> {
     if (res.length == 1) {
       String fonction;
       for (var r in res) fonction = r[0];
-      return Future.value(Navigator.push(context,
-          MaterialPageRoute(builder: (BuildContext context) {
-        return MyApp2(
-          fonction: fonction,
-        );
-      })));
+      return Future.value(LivraisonPage(
+        fonction: fonction,
+      ));
     }
 
     return Future.value(LoginPage());
@@ -40,19 +37,26 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return new SplashScreen(
-        navigateAfterFuture: loadFromFuture(),
-        image: new Image.asset('assets/logo.png'),
-        backgroundColor: Color(0xFFBE0019),
-        loadingText: new Text(
-          "chargement...",
-          style: TextStyle(
-            color: Colors.white,
-            fontFamily: "ProductSans",
-          ),
+    return MaterialApp(
+        title: 'RECRSI',
+        theme: ThemeData(
+          primarySwatch: Colors.red,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        styleTextUnderTheLoader: new TextStyle(),
-        photoSize: 90,
-        loaderColor: Colors.white);
+        debugShowCheckedModeBanner: false,
+        home: SplashScreen(
+            navigateAfterFuture: loadFromFuture(),
+            image: new Image.asset('assets/logo.png'),
+            backgroundColor: Color(0xFFBE0019),
+            loadingText: new Text(
+              "chargement...",
+              style: TextStyle(
+                color: Colors.white,
+                fontFamily: "ProductSans",
+              ),
+            ),
+            styleTextUnderTheLoader: new TextStyle(),
+            photoSize: 90,
+            loaderColor: Colors.white));
   }
 }

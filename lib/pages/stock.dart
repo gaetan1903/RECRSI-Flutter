@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:recrsi/models/utils.dart';
 import 'package:recrsi/pages/insertEdit.dart';
+import 'drawer.dart';
 
 class GestionStockPage extends StatefulWidget {
+  GestionStockPage({Key key, this.fonction}) : super(key: key);
+  final String fonction;
+
   @override
   State<StatefulWidget> createState() {
     return _GestionStockPage();
@@ -16,9 +20,11 @@ class _GestionStockPage extends State<GestionStockPage> {
       valueColor: AlwaysStoppedAnimation(Color(0xFFBE0019)));
   TextEditingController _keySearch = TextEditingController();
   String query = "1";
+  String fonction;
 
   @override
   void initState() {
+    fonction = widget.fonction;
     super.initState();
     aff();
   }
@@ -171,7 +177,7 @@ class _GestionStockPage extends State<GestionStockPage> {
         },
         child: Icon(Icons.add),
       ),
-
+      drawer: MyDrawer(fonction: fonction),
       body: Center(
           child: Column(
         children: [

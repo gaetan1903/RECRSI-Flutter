@@ -73,7 +73,7 @@ class _LoginPageState extends State<LoginPage> {
               prefs.setString('login', usr);
               Navigator.push(context,
                   MaterialPageRoute(builder: (BuildContext context) {
-                return MyApp2(fonction: fonction);
+                return LivraisonPage(fonction: fonction);
               }));
             } else {
               return showDialog<void>(

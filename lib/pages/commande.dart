@@ -4,8 +4,12 @@ import 'package:recrsi/models/utils.dart';
 import 'package:loading_overlay/loading_overlay.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:flushbar/flushbar.dart';
+import 'drawer.dart';
 
 class CommandePage extends StatefulWidget {
+  CommandePage({Key key, this.fonction}) : super(key: key);
+  final String fonction;
+
   @override
   _CommandePage createState() => _CommandePage();
 }
@@ -27,9 +31,11 @@ class _CommandePage extends State<CommandePage> {
   OverlayEntry overlayEntry;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   QRViewController controller;
+  String fonction;
 
   @override
   void initState() {
+    fonction = widget.fonction;
     _saving = true;
     super.initState();
     listProd();
@@ -95,6 +101,7 @@ class _CommandePage extends State<CommandePage> {
               },
             )
           ]),
+      drawer: MyDrawer(fonction: fonction),
       body: LoadingOverlay(
           color: Colors.black,
           progressIndicator: CircularProgressIndicator(

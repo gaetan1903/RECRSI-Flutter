@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:loading_overlay/loading_overlay.dart';
 import 'package:month_picker_dialog/month_picker_dialog.dart';
 import 'package:recrsi/models/utils.dart';
+import 'drawer.dart';
 
 class StatistiquePage extends StatefulWidget {
+  StatistiquePage({Key key, this.fonction}) : super(key: key);
+
+  final String fonction;
   @override
   State<StatefulWidget> createState() {
     return _StatistiquePage();
@@ -25,6 +29,7 @@ class _StatistiquePage extends State<StatistiquePage> {
   DateTime statD = DateTime.now();
   DateTime statM = DateTime.now();
   List<ListTile> detailProduit = [];
+  String fonction;
 
   Future _getDetail(String dday) async {
     var res = await getDetail(dday);
@@ -94,6 +99,7 @@ class _StatistiquePage extends State<StatistiquePage> {
 
   @override
   void initState() {
+    fonction = widget.fonction;
     _changeDay();
     _changeMonth();
     super.initState();
@@ -217,6 +223,7 @@ class _StatistiquePage extends State<StatistiquePage> {
           ),
         ),
         resizeToAvoidBottomInset: false,
+        drawer: MyDrawer(fonction: fonction),
         body: LoadingOverlay(
           child: Center(
               child: Column(
