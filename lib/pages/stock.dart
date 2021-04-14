@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:recrsi/models/utils.dart';
 import 'package:recrsi/pages/insertEdit.dart';
 import 'drawer.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 class GestionStockPage extends StatefulWidget {
   GestionStockPage({Key key, this.fonction}) : super(key: key);
@@ -108,46 +109,54 @@ class _GestionStockPage extends State<GestionStockPage> {
       } else {
         for (var row in res) {
           if (row[5] > 1) {
-            subtitle = "${row[5]} stock disponible ";
+            subtitle = "${row[5]} stocks disponible ";
             icon = Icon(Icons.check_box, color: Colors.teal);
           } else if (row[5] == 1) {
-            subtitle = "${row[5]} stock disponible ";
+            subtitle = "${row[5]} stocks disponible ";
             icon = Icon(Icons.error, color: Colors.orange);
           } else {
             subtitle = "Stock epuisé ";
             icon = Icon(Icons.error, color: Color(0xFFBE0019));
           }
 
-          produit.add(ListTile(
-            onTap: () {
-              _infoProduit(row);
-            },
-            title: Text(
-              "${row[2]} - ${row[1]}",
-              style: TextStyle(
-                fontFamily: "ProductSans",
-              ),
-            ),
-            subtitle: Text(
-              subtitle,
-              style: TextStyle(
-                fontFamily: "ProductSans",
-              ),
-            ),
-            leading: icon,
-            trailing: IconButton(
-              icon: Icon(Icons.edit),
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (BuildContext context) {
-                  return ProductPage(
-                    row: row,
-                    title: "Modification Produit",
-                  );
-                }));
-              },
-            ),
-          ));
+          produit.add(
+            Slidable(
+                actionPane: SlidableDrawerActionPane(),
+                actionExtentRatio: 0.25,
+                child: ListTile(
+                  onTap: () {
+                    _infoProduit(row);
+                  },
+                  title: Text(
+                    "${row[2]} - ${row[1]}",
+                    style: TextStyle(
+                      fontFamily: "ProductSans",
+                    ),
+                  ),
+                  subtitle: Text(
+                    subtitle,
+                    style: TextStyle(
+                      fontFamily: "ProductSans",
+                    ),
+                  ),
+                  leading: icon,
+                ),
+                secondaryActions: <Widget>[
+                  IconSlideAction(
+                    icon: Icons.edit,
+                    foregroundColor: Color(0xFFBE0019),
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (BuildContext context) {
+                        return ProductPage(
+                          row: row,
+                          title: "Modification Produit",
+                        );
+                      }));
+                    },
+                  ),
+                ]),
+          );
         }
       }
     });
