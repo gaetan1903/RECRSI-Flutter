@@ -167,34 +167,36 @@ class _LivraisonPage extends State<LivraisonPage> {
                 ),
               ),
               leading: icon,
-              trailing: PopupMenuButton(
-                  itemBuilder: (context) => [
-                        PopupMenuItem(
-                            value: "LIVREE-${row[0]}-${row[8]}",
-                            child: Text(
-                              "Livraison livrée",
-                              style: TextStyle(
-                                fontFamily: "ProductSans",
-                              ),
-                            )),
-                        PopupMenuItem(
-                            value: "ANNULEE-${row[0]}-${row[8]}",
-                            child: Text(
-                              "Livraison annulée",
-                              style: TextStyle(
-                                fontFamily: "ProductSans",
-                              ),
-                            )),
-                      ],
-                  onSelected: (value) {
-                    List<String> valList = value.split('-');
-                    setState(() {
-                      _saving = true;
-                    });
-                    statusChange(valList[0], int.parse(valList[1]),
-                        int.parse(valList[2]));
-                  },
-                  icon: Icon(Icons.more_vert_rounded)),
+              trailing: row[7] != "NON LIVREE"
+                  ? null
+                  : PopupMenuButton(
+                      itemBuilder: (context) => [
+                            PopupMenuItem(
+                                value: "LIVREE-${row[0]}-${row[8]}",
+                                child: Text(
+                                  "Livraison livrée",
+                                  style: TextStyle(
+                                    fontFamily: "ProductSans",
+                                  ),
+                                )),
+                            PopupMenuItem(
+                                value: "ANNULEE-${row[0]}-${row[8]}",
+                                child: Text(
+                                  "Livraison annulée",
+                                  style: TextStyle(
+                                    fontFamily: "ProductSans",
+                                  ),
+                                )),
+                          ],
+                      onSelected: (value) {
+                        List<String> valList = value.split('-');
+                        setState(() {
+                          _saving = true;
+                        });
+                        statusChange(valList[0], int.parse(valList[1]),
+                            int.parse(valList[2]));
+                      },
+                      icon: Icon(Icons.more_vert_rounded)),
               subtitle: Text(
                 subtitle,
                 style: TextStyle(
