@@ -67,7 +67,16 @@ class _CommandePage extends State<CommandePage> {
         context: context,
         initialDate: _dateLivraison,
         firstDate: DateTime(2020),
-        lastDate: DateTime(2050));
+        lastDate: DateTime(2050),
+        builder: (BuildContext context, Widget child) {
+          return Theme(
+            data: ThemeData.light().copyWith(
+              colorScheme:
+                  ColorScheme.light().copyWith(primary: Color(0xFFBE0019)),
+            ),
+            child: child,
+          );
+        });
 
     if (_datePicker != null) {
       _dateLivraison = _datePicker;

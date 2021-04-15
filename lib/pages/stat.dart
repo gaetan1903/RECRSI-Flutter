@@ -123,11 +123,19 @@ class _StatistiquePage extends State<StatistiquePage> {
 
   Future<Null> _selectDate(BuildContext context) async {
     DateTime _datePicker = await showDatePicker(
-      context: context,
-      initialDate: statD,
-      firstDate: DateTime(2020),
-      lastDate: DateTime(2050),
-    );
+        context: context,
+        initialDate: statD,
+        firstDate: DateTime(2020),
+        lastDate: DateTime(2050),
+        builder: (BuildContext context, Widget child) {
+          return Theme(
+            data: ThemeData.light().copyWith(
+              colorScheme:
+                  ColorScheme.light().copyWith(primary: Color(0xFFBE0019)),
+            ),
+            child: child,
+          );
+        });
 
     if (_datePicker != null) {
       statD = _datePicker;
