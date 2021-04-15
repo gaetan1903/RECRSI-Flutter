@@ -144,7 +144,10 @@ class MyDrawer extends StatelessWidget {
                       ),
                       leading: Icon(Icons.add_shopping_cart, color: Colors.red),
                       onTap: () {
-                        Navigator.of(context).pop();
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (BuildContext context) {
+                          return LivraisonPage(fonction: fonction);
+                        }));
                       },
                     ),
                     ListTile(
@@ -158,7 +161,9 @@ class MyDrawer extends StatelessWidget {
                       onTap: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (BuildContext context) {
-                          return CommandePage();
+                          return CommandePage(
+                            fonction: fonction,
+                          );
                         }));
                       },
                     ),
