@@ -4,29 +4,6 @@ import '../models/utils.dart';
 import 'package:loading_overlay/loading_overlay.dart';
 import 'package:flutter/cupertino.dart';
 
-/*
-class MyApp2 extends StatelessWidget {
-  MyApp2({Key key, this.fonction}) : super(key: key);
-
-  final String fonction;
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'RECRSI',
-      theme: ThemeData(
-        primarySwatch: Colors.red,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      debugShowCheckedModeBanner: false,
-      home: MyHomePage(
-        title: 'Livraison',
-        fonction: fonction,
-      ),
-    );
-  }
-}*/
-
 class LivraisonPage extends StatefulWidget {
   LivraisonPage({Key key, this.fonction}) : super(key: key);
 
