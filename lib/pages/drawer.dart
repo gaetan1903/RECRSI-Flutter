@@ -4,6 +4,7 @@ import 'stock.dart';
 import 'stat.dart';
 import 'login.dart';
 import 'livraison.dart';
+import 'admin.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MyDrawer extends StatelessWidget {
@@ -100,8 +101,10 @@ class MyDrawer extends StatelessWidget {
                   ),
                   leading: Icon(Icons.settings_outlined, color: Colors.red),
                   onTap: () {
-                    Navigator.of(context).pop();
-                    // adminCompte();
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (BuildContext context) {
+                      return AdminPage(fonction: fonction);
+                    }));
                   },
                 ),
                 ListTile(

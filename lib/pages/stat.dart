@@ -77,7 +77,8 @@ class _StatistiquePage extends State<StatistiquePage> {
           ),
           children: <Widget>[
             Container(
-                height: 200,
+                height: MediaQuery.of(context).size.height * 0.6,
+                width: MediaQuery.of(context).size.width * 0.8,
                 child: ListView(
                   children: detailProduit,
                 )),

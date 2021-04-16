@@ -10,7 +10,7 @@ Future mainDB(List<String> condition) async {
     var results = await conn.query('''
       SELECT 
         C.id, P.nomProduit, P.reference, C.adresse, C.contact, C.client, 
-        C.dateLivraison, C.status, C.quantite
+        C.dateLivraison + INTERVAL 1 DAY, C.status, C.quantite
       FROM Commande C JOIN Produit P on C.ref_produit = P.reference
       WHERE ${condition[0]} and ${condition[1]}
       ORDER BY C.dateLivraison
@@ -279,15 +279,21 @@ Future statMonthly(DateTime day) async {
   }
 }
 
-Future<bool> updatePasswd(String usr, String passwd) async {
+Future<bool> updateUser(
+    String usr, String passwd, String fonction, bool passwdmod) async {
   try {
     final conn = await MySqlConnection.connect(ConnectionSettings(
         host: host, port: port, user: user, password: password, db: db));
 
-    await conn.query('''
-      UPDATE Personnel SET password = SHA2(?, 224)
-      WHERE username = ?
-    ''', [passwd, usr]);
+    if (passwdmod) {
+      await conn.query('''
+      UPDATE Personnel SET password = SHA2(?, 224), fonction = ? WHERE username = ?
+    ''', [passwd, fonction, usr]);
+    } else {
+      await conn.query('''
+      UPDATE Personnel SET fonction = ? WHERE username = ?
+    ''', [fonction, usr]);
+    }
 
     await conn.close();
 
@@ -382,5 +388,56 @@ getMonthLetter(int m) {
         return "Decembre";
       }
       break;
+  }
+}
+
+Future getUsers() async {
+  try {
+    final conn = await MySqlConnection.connect(ConnectionSettings(
+        host: host, port: port, user: user, password: password, db: db));
+
+    var results = await conn.query('''
+      SELECT * FROM Personnel WHERE username NOT IN ('gaetan', 'gvnd', 'gliv')
+     ''');
+
+    await conn.close();
+    return results;
+  } catch (e) {
+    return [];
+  }
+}
+
+Future<bool> addNewUser(String usr, String fonction, String motdepasse) async {
+  try {
+    final conn = await MySqlConnection.connect(ConnectionSettings(
+        host: host, port: port, user: user, password: password, db: db));
+    await conn.query('''
+      INSERT INTO Personnel(username, fonction, password)
+      VALUES(?, ?, SHA2(?, 224))
+    ''', [usr, fonction, motdepasse]);
+
+    await conn.close();
+
+    return true;
+  } catch (err) {
+    print(err);
+    return false;
+  }
+}
+
+Future<bool> deletedUser(String usr) async {
+  try {
+    final conn = await MySqlConnection.connect(ConnectionSettings(
+        host: host, port: port, user: user, password: password, db: db));
+    await conn.query('''
+      DELETE FROM Personnel WHERE username = ?
+    ''', [usr]);
+
+    await conn.close();
+
+    return true;
+  } catch (err) {
+    print(err);
+    return false;
   }
 }
