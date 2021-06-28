@@ -5,7 +5,8 @@ C'est une application de gestion de magasin, réalisée en Flutter
 
 [![Android](https://img.shields.io/badge/Android-yes-teal.svg)](#README)
 [![Open Source Love svg1](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](#README)
-[![Version](https://img.shields.io/badge/Version-1.1.0-teal)](https://github.com/FoyerSociety/Fiche-metier/releases)
+[![Version](https://img.shields.io/badge/Version-1.1.0-teal)](https://github.com/gaetan1903/RECRSI-Flutter/releases)
+[![Github All Releases](https://img.shields.io/github/downloads/gaetan1903/RECRSI-Flutter/total.svg)](https://github.com/gaetan1903/RECRSI-Flutter/releases/download/v1.1.0/RECRSI-v1.1.0-release.apk)
 
 
 <table >
