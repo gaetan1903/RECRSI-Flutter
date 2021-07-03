@@ -108,7 +108,7 @@ class _StatistiquePage extends State<StatistiquePage> {
       if (_focus0.hasFocus) _selectDate(context);
     });
     _focus1.addListener(() {
-      if (_focus1.hasFocus) _selectMonth();
+      if (_focus1.hasFocus) _selectMonth(context);
     });
     _statDay(statD);
     _statMonth(statM);
@@ -197,7 +197,7 @@ class _StatistiquePage extends State<StatistiquePage> {
     });
   }
 
-  _selectMonth() async {
+  _selectMonth(BuildContext context) async {
     showMonthPicker(
       context: context,
       firstDate: DateTime(2021, 5),

@@ -5,7 +5,10 @@ C'est une application de gestion de magasin, réalisée en Flutter
 
 [![Android](https://img.shields.io/badge/Android-yes-teal.svg)](#README)
 [![Open Source Love svg1](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](#README)
-[![Version](https://img.shields.io/badge/Version-1.0.2-teal)](https://github.com/FoyerSociety/Fiche-metier/releases)
+[![Version](https://img.shields.io/badge/Version-1.1.1-teal)](https://github.com/FoyerSociety/Fiche-metier/releases)
+
+
+<p halign='center'><a href=''>Download APK Latest [1.1.1]</a></p>
 
 
 <table >

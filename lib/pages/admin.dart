@@ -429,7 +429,7 @@ class _AdminPage extends State<AdminPage> {
                     color: Color(0xFF464637), fontFamily: "ProductSans")),
             content: SingleChildScrollView(
                 child: Text(
-              "Voulez-vous vraiment Supprimer l'utilidsateur $dropdownRef ?",
+              "Voulez-vous vraiment Supprimer l'utilisateur '$dropdownRef' ?",
               style: TextStyle(
                 fontFamily: "ProductSans",
               ),
